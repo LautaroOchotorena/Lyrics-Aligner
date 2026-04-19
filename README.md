@@ -1,7 +1,7 @@
 # Lyrics Aligner Web App
 
 <details open>
-<summary>Espanol</summary>
+<summary>Español</summary>
 
 Aplicacion web completa (frontend + backend) para sincronizar manualmente audio con lyrics.
 
