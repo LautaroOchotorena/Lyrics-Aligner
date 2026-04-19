@@ -1,13 +1,3 @@
----
-title: Lyrics Aligner
-emoji: "🎵"
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # Lyrics Aligner Web App
 
 <details open>
