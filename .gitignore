@@ -3,6 +3,9 @@ __pycache__/
 *.pyc
 backend/.venv/
 
+# Local env files
+.env
+
 # Backend runtime data
 backend/uploads/
 backend/exports/
@@ -14,3 +17,6 @@ frontend/dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Hugging Face Spaces
+deploy_hf_space.py

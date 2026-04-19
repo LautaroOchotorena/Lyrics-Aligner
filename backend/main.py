@@ -8,7 +8,8 @@ from uuid import uuid4
 
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import FileResponse, Response
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 ALLOWED_AUDIO_EXTENSIONS = {
@@ -124,6 +125,20 @@ def _model_to_dict(model: TimedLine) -> dict:
     if hasattr(model, "model_dump"):
         return model.model_dump()
     return model.dict()
+
+
+def _resolve_frontend_dist_dir() -> Optional[Path]:
+    project_root = Path(__file__).resolve().parent.parent
+    candidates = [
+        project_root / "frontend_dist",
+        project_root / "frontend" / "dist",
+    ]
+
+    for candidate in candidates:
+        if (candidate / "index.html").exists():
+            return candidate
+
+    return None
 
 
 @app.get("/api/health")
@@ -311,3 +326,24 @@ def export_json(payload: ExportPayload):
             "Content-Disposition": 'attachment; filename="output.json"',
         },
     )
+
+
+FRONTEND_DIST_DIR = _resolve_frontend_dist_dir()
+
+if FRONTEND_DIST_DIR is not None:
+    app.mount(
+        "/assets",
+        StaticFiles(directory=str(FRONTEND_DIST_DIR / "assets")),
+        name="frontend-assets",
+    )
+
+    @app.get("/", include_in_schema=False)
+    def serve_frontend_index() -> FileResponse:
+        return FileResponse(FRONTEND_DIST_DIR / "index.html")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    def serve_frontend_spa(full_path: str):
+        target = FRONTEND_DIST_DIR / full_path
+        if target.is_file():
+            return FileResponse(target)
+        return FileResponse(FRONTEND_DIST_DIR / "index.html")

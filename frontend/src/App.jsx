@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const API_BASE = (import.meta.env.VITE_API_BASE || "http://localhost:8000").replace(/\/$/, "");
+const API_BASE = (import.meta.env.VITE_API_BASE || "").replace(/\/$/, "");
 const STORAGE_KEY = "lyrics-aligner-progress-v1";
 const LANGUAGE_STORAGE_KEY = "lyrics-aligner-language-v1";
 

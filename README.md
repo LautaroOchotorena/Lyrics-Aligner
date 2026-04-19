@@ -1,9 +1,21 @@
+---
+title: Lyrics Aligner
+emoji: "🎵"
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Lyrics Aligner Web App
 
 <details open>
 <summary>Español</summary>
 
 Aplicacion web completa (frontend + backend) para sincronizar manualmente audio con lyrics.
+
+App online: https://huggingface.co/spaces/LautaroOcho/Lyrics-Aligner
 
 ## Estructura
 
@@ -137,6 +149,8 @@ VITE_API_BASE=http://localhost:8000
 <summary>English</summary>
 
 Complete web app (frontend + backend) to manually sync audio with lyrics.
+
+Online app: https://huggingface.co/spaces/LautaroOcho/Lyrics-Aligner
 
 ## Structure
 
